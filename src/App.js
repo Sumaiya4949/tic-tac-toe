@@ -46,17 +46,17 @@ function App() {
 
   return (
     <div className="gameBoard">
-      <div>
+      <div className='boardRow'>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 1)}>{score[0]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 2)}>{score[1]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 3)}>{score[2]}</button>
       </div>
-      <div>
+      <div className='boardRow'>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 4)}>{score[3]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 5)}>{score[4]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 6)}>{score[5]}</button>
       </div>
-      <div>
+      <div className='boardRow'>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 7)}>{score[6]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 8)}>{score[7]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 9)}>{score[8]}</button>
