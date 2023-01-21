@@ -19,7 +19,7 @@ function App() {
       setPlayerTwo(true);
 
       const newScore = score.map((item, index) => {
-        if (index === arg - 1) {
+        if (index === arg - 1 && item === "") {
           return item = 0;
         }
         else {
@@ -33,7 +33,7 @@ function App() {
       setPlayerOne(true);
 
       const newScore = score.map((item, index) => {
-        if (index === arg - 1) {
+        if (index === arg - 1 && item === "") {
           return item = 1;
         }
         else {
