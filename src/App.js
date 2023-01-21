@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
   const [playerOne , setPlayerOne] = useState(true);
   const [playerTwo , setPlayerTwo] = useState(false);
   const [score , setScore] = useState(scoreArray);
+  const [winner, setWinner] = useState("No Winner");
   
   const onClickHandler = (e, arg) => {
 
@@ -44,8 +45,39 @@ function App() {
     }
   }
 
+  useEffect(() => {
+  let i = 0; 
+   while(i < 7) {
+    if (score[i] === score[i+1] && score[i] === score[i+2] && score[i] !== "") {
+      setWinner(score[i])
+      break;
+    }
+    i = i + 3;
+   }
+
+   let j = 0;
+   while(j < 3) {
+    if (score[j] === score[j+3] && score[j] === score[j+6] && score[j] !== "") {
+      setWinner(score[i]);
+      break;
+    }
+    j = j + 1;
+   }
+
+   let k = 0;
+   if (score[k] === score[k+4] && score[k+4] === score[k+8] && score[k+4] !== "") {
+      setWinner(score[i]);
+    }
+   else if (score[k+2] === score[k+4] && score[k+4] === score[k+6] && score[k+4] !== "") {
+      setWinner(score[i])
+   }
+
+  }, [score])
+
   return (
+    <>
     <div className="gameBoard">
+    <div className='showWinner'>Winner: {winner}</div>
       <div className='boardRow'>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 1)}>{score[0]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 2)}>{score[1]}</button>
@@ -62,6 +94,7 @@ function App() {
         <button className='boardSection' onClick={(e) => onClickHandler(e, 9)}>{score[8]}</button>
       </div>
     </div>
+    </>
   );
 }
 

@@ -18,6 +18,12 @@
 .boardSection {
   width: 6rem;
   height: 6rem;
-  
+}
+
+.showWinner {
+  margin-bottom: 10px;
+  width: 9rem;
+  height: 1rem;
+  padding: auto;
 }
 
