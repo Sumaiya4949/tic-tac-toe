@@ -1,36 +1,46 @@
 import { useState } from 'react';
 import './App.css';
 function App() {
-  const [playerOne , setPlayerOne] = useState(true);
-  const [playerTwo , setPlayerTwo] = useState(false);
-  const [score , setScore] = useState([]);
+
 
   const scoreArray = [];
-  scoreArray.length = 9;
-
+  for(let i = 0; i < 9; i++) {
+      scoreArray[i] = "";
+    }
+  
+  const [playerOne , setPlayerOne] = useState(true);
+  const [playerTwo , setPlayerTwo] = useState(false);
+  const [score , setScore] = useState(scoreArray);
+  
   const onClickHandler = (e, arg) => {
 
     if (playerOne) {
       setPlayerOne(false);
       setPlayerTwo(true);
 
-      for(let i = 0; i < scoreArray.length; i++) {
-        if (i === arg - 1) {
-          scoreArray[i] = 0;
+      const newScore = score.map((item, index) => {
+        if (index === arg - 1) {
+          return item = 0;
         }
-      }
-      setScore(scoreArray);
+        else {
+          return item;
+        }
+      })
+      setScore(newScore);
     }
     else {
       setPlayerTwo(false); 
       setPlayerOne(true);
 
-      for(let i = 0; i < scoreArray.length; i++) {
-        if (i === arg - 1) {
-          scoreArray[i] = 1;
+      const newScore = score.map((item, index) => {
+        if (index === arg - 1) {
+          return item = 1;
         }
-      }
-      setScore(scoreArray);
+        else {
+          return item;
+        }
+      })
+      setScore(newScore)
     }
   }
 
