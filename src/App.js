@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 function App() {
 
@@ -45,9 +45,9 @@ function App() {
     }
   }
 
-  const clearGameBoard = (sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
+  const clearGameBoard = useCallback((sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
     setScore(score.filter((item, index) => index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex))
-  }
+  }, [score])
 
   useEffect(() => {
   let i = 0; 
