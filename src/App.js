@@ -46,7 +46,7 @@ function App() {
   }
 
   const clearGameBoard = useCallback((sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
-    setScore(score.filter((item, index) => index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex))
+    const winnerValue = score.filter((item, index) => index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex);
   }, [score])
 
   useEffect(() => {
