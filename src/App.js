@@ -49,7 +49,7 @@ function App() {
   let i = 0; 
    while(i < 7) {
     if (score[i] === score[i+1] && score[i] === score[i+2] && score[i] !== "") {
-      setWinner(score[i])
+      setWinner(playerOne ? "Player Two" : "Player One")
       break;
     }
     i = i + 3;
@@ -58,7 +58,7 @@ function App() {
    let j = 0;
    while(j < 3) {
     if (score[j] === score[j+3] && score[j] === score[j+6] && score[j] !== "") {
-      setWinner(score[i]);
+      setWinner(playerOne ? "Player Two" : "Player One");
       break;
     }
     j = j + 1;
@@ -66,10 +66,10 @@ function App() {
 
    let k = 0;
    if (score[k] === score[k+4] && score[k+4] === score[k+8] && score[k+4] !== "") {
-      setWinner(score[i]);
+    setWinner(playerOne ? "Player Two" : "Player One");
     }
    else if (score[k+2] === score[k+4] && score[k+4] === score[k+6] && score[k+4] !== "") {
-      setWinner(score[i])
+    setWinner(playerOne ? "Player Two" : "Player One");
    }
 
   }, [score])
