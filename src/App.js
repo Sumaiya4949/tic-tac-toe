@@ -15,34 +15,37 @@ function App() {
   
   const onClickHandler = (e, arg) => {
 
-    if (playerOne) {
-      setPlayerOne(false);
-      setPlayerTwo(true);
-
-      const newScore = score.map((item, index) => {
-        if (index === arg - 1 && item === "") {
-          return item = 0;
-        }
-        else {
-          return item;
-        }
-      })
-      setScore(newScore);
+    if(winner === "No Winner") {
+      if (playerOne) {
+        setPlayerOne(false);
+        setPlayerTwo(true);
+  
+        const newScore = score.map((item, index) => {
+          if (index === arg - 1 && item === "") {
+            return item = 0;
+          }
+          else {
+            return item;
+          }
+        })
+        setScore(newScore);
+      }
+      else {
+        setPlayerTwo(false); 
+        setPlayerOne(true);
+  
+        const newScore = score.map((item, index) => {
+          if (index === arg - 1 && item === "") {
+            return item = 1;
+          }
+          else {
+            return item;
+          }
+        })
+        setScore(newScore)
+      }
     }
-    else {
-      setPlayerTwo(false); 
-      setPlayerOne(true);
 
-      const newScore = score.map((item, index) => {
-        if (index === arg - 1 && item === "") {
-          return item = 1;
-        }
-        else {
-          return item;
-        }
-      })
-      setScore(newScore)
-    }
   }
 
   const clearGameBoard = useCallback((sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
