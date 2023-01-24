@@ -12,7 +12,6 @@ function App() {
   const [playerTwo , setPlayerTwo] = useState(false);
   const [score , setScore] = useState(scoreArray);
   const [winner, setWinner] = useState("No Winner");
-  const [winnerSections, setWinnerSections] = useState([]);
   const [winnerSectionsIndex, setWinnerSectionsIndex] = useState([]);
   
   const onClickHandler = (e, arg) => {
@@ -50,26 +49,12 @@ function App() {
 
   }
 
-  const clearGameBoard = useCallback((sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
-    const winnerValue = score.map((item, index) => {
-      if (index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex){
-        return item;
-      }
-      else {
-        return "";
-      }
-    })
-    setWinnerSections(winnerValue);
-    setWinnerSectionsIndex([sectionOneIndex, sectionTwoIndex, sectionThreeIndex]);
-  }, [score])
-
   useEffect(() => {
-  if (winnerSections.length < 1) {
     let i = 0; 
    while(i < 7) {
     if (score[i] === score[i+1] && score[i] === score[i+2] && score[i] !== "") {
       setWinner(playerOne ? "Player Two" : "Player One")
-      clearGameBoard(i, i+1, i+2);
+      setWinnerSectionsIndex([i, i+1, i+2]);
       break;
     }
     i = i + 3;
@@ -79,7 +64,7 @@ function App() {
    while(j < 3) {
     if (score[j] === score[j+3] && score[j] === score[j+6] && score[j] !== "") {
       setWinner(playerOne ? "Player Two" : "Player One");
-      clearGameBoard(j, j+3, j+6);
+      setWinnerSectionsIndex([j, j+3, j+6]);
       break;
     }
     j = j + 1;
@@ -88,20 +73,13 @@ function App() {
    let k = 0;
    if (score[k] === score[k+4] && score[k+4] === score[k+8] && score[k+4] !== "") {
     setWinner(playerOne ? "Player Two" : "Player One");
-    clearGameBoard(k, k+4, k+8);
+    setWinnerSectionsIndex([k, k+4, k+8]);
     }
    else if (score[k+2] === score[k+4] && score[k+4] === score[k+6] && score[k+4] !== "") {
     setWinner(playerOne ? "Player Two" : "Player One");
-    clearGameBoard(k+2, k+6, k+4);
+    setWinnerSectionsIndex([k+2, k+6, k+4]);
    }
-  }
   }, [score])
-
-  useEffect(() => {
-    if (winner === "Player One" || winner === "Player One") {
-      setScore(winnerSections);
-    }
-  }, [winner])
 
   const getSectionsStyle = (buttonNumber) => {
     if (winnerSectionsIndex.includes(buttonNumber)) {
