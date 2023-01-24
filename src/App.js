@@ -13,7 +13,21 @@ function App() {
   const [score , setScore] = useState(scoreArray);
   const [winner, setWinner] = useState("No Winner");
   const [winnerSectionsIndex, setWinnerSectionsIndex] = useState([]);
+  const [isGameReset, setGameResetStatus] = useState(false);
   
+  const getSectionsStyle = (buttonNumber) => {
+    if (winnerSectionsIndex.includes(buttonNumber)) {
+      return { backgroundColor: '#C27664', transition: '2s'}
+    }
+    else {
+      return { backgroundColor: '' }
+    }
+  }
+
+  const onResetHandler = () => {
+    setGameResetStatus(true);
+  }
+
   const onClickHandler = (e, arg) => {
 
     if(winner === "No Winner") {
@@ -79,16 +93,18 @@ function App() {
     setWinner(playerOne ? "Player Two" : "Player One");
     setWinnerSectionsIndex([k+2, k+6, k+4]);
    }
-  }, [score])
+  }, [score]);
 
-  const getSectionsStyle = (buttonNumber) => {
-    if (winnerSectionsIndex.includes(buttonNumber)) {
-      return { backgroundColor: '#C27664', transition: '2s'}
+  useEffect(() => {
+    if (isGameReset) {
+      setScore(score.map((item) => item = ""));
+      setWinnerSectionsIndex(winnerSectionsIndex.map((item) => item = ""));
+      setPlayerOne(true);
+      setPlayerTwo(false);
+      setWinner("No Winner");
+      setGameResetStatus(false);
     }
-    else {
-      return { backgroundColor: '' }
-    }
-  }
+  }, [isGameReset]);
 
   return (
     <>
@@ -111,6 +127,7 @@ function App() {
         <button className='boardSection' style={getSectionsStyle(7)} onClick={(e) => onClickHandler(e, 8)}>{score[7]}</button>
         <button className='boardSection' style={getSectionsStyle(8)}onClick={(e) => onClickHandler(e, 9)}>{score[8]}</button>
       </div>
+      <button className='resetButton' onClick={onResetHandler}>Restart Game</button>
     </div>
     </>
   );
