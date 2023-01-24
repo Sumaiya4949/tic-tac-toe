@@ -12,6 +12,7 @@ function App() {
   const [playerTwo , setPlayerTwo] = useState(false);
   const [score , setScore] = useState(scoreArray);
   const [winner, setWinner] = useState("No Winner");
+  const [winnerSections, setWinnerSections] = useState([]); 
   
   const onClickHandler = (e, arg) => {
 
@@ -50,10 +51,12 @@ function App() {
 
   const clearGameBoard = useCallback((sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
     const winnerValue = score.filter((item, index) => index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex);
+    setWinnerSections(winnerValue);
   }, [score])
 
   useEffect(() => {
-  let i = 0; 
+  if (winnerSections.length < 1) {
+    let i = 0; 
    while(i < 7) {
     if (score[i] === score[i+1] && score[i] === score[i+2] && score[i] !== "") {
       setWinner(playerOne ? "Player Two" : "Player One")
@@ -82,8 +85,14 @@ function App() {
     setWinner(playerOne ? "Player Two" : "Player One");
     clearGameBoard(k+2, k+6, k+4);
    }
-
+  }
   }, [score])
+
+  useEffect(() => {
+    if (winner === "Player One" || winner === "Player One") {
+      setScore(winnerSections);
+    }
+  }, [winner])
 
   return (
     <>
