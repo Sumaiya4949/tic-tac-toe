@@ -17,14 +17,14 @@ function App() {
   const [playCount, setPlayCount] = useState(0);
   const [isGameDraw, setGameDraw] = useState(false);
   
-  const getSectionsStyle = (buttonNumber) => {
+  const getSectionsStyle = useCallback((buttonNumber) => {
     if (winnerSectionsIndex.includes(buttonNumber)) {
       return { backgroundColor: '#C27664', transition: '2s'}
     }
     else {
       return { backgroundColor: '' }
     }
-  }
+  },[winnerSectionsIndex]);
 
   const onResetHandler = () => {
     setGameResetStatus(true);
@@ -49,7 +49,7 @@ function App() {
         })
         setScore(newScore);
       }
-      else {
+      else if (playerTwo){
         setPlayerTwo(false); 
         setPlayerOne(true);
   
@@ -97,7 +97,7 @@ function App() {
     setWinner(playerOne ? "Player Two" : "Player One");
     setWinnerSectionsIndex([k+2, k+6, k+4]);
    }
-  }, [score]);
+  }, [score, playerOne]);
 
   useEffect(() => {
     if (isGameReset) {
@@ -110,7 +110,7 @@ function App() {
       setPlayCount(0);
       setGameDraw(false);
     }
-  }, [isGameReset]);
+  }, [isGameReset, winnerSectionsIndex, score]);
 
   useEffect(() => {
     if (playCount === 9 && winner === "No Winner") {
