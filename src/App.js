@@ -88,7 +88,9 @@ function App() {
   return (
     <>
     <div className="gameBoard">
-    <div className='showWinner'>Winner: {winner}</div>
+      {winner === "No Winner" ?  <div className='showWinner'>{`Next move: ${playerOne ? "Player One" : "Player Two"}`}</div> :
+      <div className='showWinner'>Winner: {winner}</div>
+      }
       <div className='boardRow'>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 1)}>{score[0]}</button>
         <button className='boardSection' onClick={(e) => onClickHandler(e, 2)}>{score[1]}</button>

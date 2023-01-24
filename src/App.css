@@ -1,6 +1,6 @@
 .gameBoard {
   width: 20rem;
-  height: 20rem;
+  height: 21rem;
   background-color: antiquewhite;
   margin: auto;
   border: 3px solid green;
@@ -22,7 +22,7 @@
 
 .showWinner {
   margin-bottom: 10px;
-  width: 9rem;
+  width: 12rem;
   height: 1rem;
   padding: auto;
 }
