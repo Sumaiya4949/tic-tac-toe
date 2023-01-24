@@ -1,10 +1,11 @@
 .gameBoard {
-  width: 20rem;
+  width: 19rem;
   height: 21rem;
-  background-color: antiquewhite;
+  background-color: #84D2C5;
   margin: auto;
   border: 3px solid green;
   padding: 10px;
+  padding-left: 20px;
 }
 
 .boardRow {
@@ -25,5 +26,7 @@
   width: 12rem;
   height: 1rem;
   padding: auto;
+  font: italic small-caps bold 16px/2 cursive;
+  padding-bottom: 10px;
 }
 

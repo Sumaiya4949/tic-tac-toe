@@ -12,7 +12,8 @@ function App() {
   const [playerTwo , setPlayerTwo] = useState(false);
   const [score , setScore] = useState(scoreArray);
   const [winner, setWinner] = useState("No Winner");
-  const [winnerSections, setWinnerSections] = useState([]); 
+  const [winnerSections, setWinnerSections] = useState([]);
+  const [winnerSectionsIndex, setWinnerSectionsIndex] = useState([]);
   
   const onClickHandler = (e, arg) => {
 
@@ -59,6 +60,7 @@ function App() {
       }
     })
     setWinnerSections(winnerValue);
+    setWinnerSectionsIndex([sectionOneIndex, sectionTwoIndex, sectionThreeIndex]);
   }, [score])
 
   useEffect(() => {
@@ -101,6 +103,15 @@ function App() {
     }
   }, [winner])
 
+  const getSectionsStyle = (buttonNumber) => {
+    if (winnerSectionsIndex.includes(buttonNumber)) {
+      return { backgroundColor: '#C27664', transition: '2s'}
+    }
+    else {
+      return { backgroundColor: '' }
+    }
+  }
+
   return (
     <>
     <div className="gameBoard">
@@ -108,19 +119,19 @@ function App() {
       <div className='showWinner'>Winner: {winner}</div>
       }
       <div className='boardRow'>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 1)}>{score[0]}</button>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 2)}>{score[1]}</button>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 3)}>{score[2]}</button>
+        <button className='boardSection' style={getSectionsStyle(0)} onClick={(e) => onClickHandler(e, 1)}>{score[0]}</button>
+        <button className='boardSection' style={getSectionsStyle(1)} onClick={(e) => onClickHandler(e, 2)}>{score[1]}</button>
+        <button className='boardSection' style={getSectionsStyle(2)} onClick={(e) => onClickHandler(e, 3)}>{score[2]}</button>
       </div>
       <div className='boardRow'>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 4)}>{score[3]}</button>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 5)}>{score[4]}</button>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 6)}>{score[5]}</button>
+        <button className='boardSection' style={getSectionsStyle(3)} onClick={(e) => onClickHandler(e, 4)}>{score[3]}</button>
+        <button className='boardSection' style={getSectionsStyle(4)} onClick={(e) => onClickHandler(e, 5)}>{score[4]}</button>
+        <button className='boardSection' style={getSectionsStyle(5)} onClick={(e) => onClickHandler(e, 6)}>{score[5]}</button>
       </div>
       <div className='boardRow'>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 7)}>{score[6]}</button>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 8)}>{score[7]}</button>
-        <button className='boardSection' onClick={(e) => onClickHandler(e, 9)}>{score[8]}</button>
+        <button className='boardSection' style={getSectionsStyle(6)} onClick={(e) => onClickHandler(e, 7)}>{score[6]}</button>
+        <button className='boardSection' style={getSectionsStyle(7)} onClick={(e) => onClickHandler(e, 8)}>{score[7]}</button>
+        <button className='boardSection' style={getSectionsStyle(8)}onClick={(e) => onClickHandler(e, 9)}>{score[8]}</button>
       </div>
     </div>
     </>
