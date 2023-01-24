@@ -14,6 +14,8 @@ function App() {
   const [winner, setWinner] = useState("No Winner");
   const [winnerSectionsIndex, setWinnerSectionsIndex] = useState([]);
   const [isGameReset, setGameResetStatus] = useState(false);
+  const [playCount, setPlayCount] = useState(0);
+  const [isGameDraw, setGameDraw] = useState(false);
   
   const getSectionsStyle = (buttonNumber) => {
     if (winnerSectionsIndex.includes(buttonNumber)) {
@@ -30,7 +32,9 @@ function App() {
 
   const onClickHandler = (e, arg) => {
 
-    if(winner === "No Winner") {
+    if(winner === "No Winner" && isGameDraw === false) {
+      setPlayCount((prev) => prev + 1);
+
       if (playerOne) {
         setPlayerOne(false);
         setPlayerTwo(true);
@@ -103,15 +107,26 @@ function App() {
       setPlayerTwo(false);
       setWinner("No Winner");
       setGameResetStatus(false);
+      setPlayCount(0);
+      setGameDraw(false);
     }
   }, [isGameReset]);
+
+  useEffect(() => {
+    if (playCount === 9 && winner === "No Winner") {
+      setGameDraw(true);
+    }
+  },[playCount, winner]);
+
+  const winnerSection = winner === "No Winner" ?  <div className='showWinner'>{`Next move: ${playerOne ? "Player One" : "Player Two"}`}</div> :
+  <div className='showWinner'>Winner: {winner}</div>
+
+  console.log(playCount);
 
   return (
     <>
     <div className="gameBoard">
-      {winner === "No Winner" ?  <div className='showWinner'>{`Next move: ${playerOne ? "Player One" : "Player Two"}`}</div> :
-      <div className='showWinner'>Winner: {winner}</div>
-      }
+    { playCount === 9 && winner === "No Winner" ? <div className='showWinner'>Game Draw</div> : winnerSection}
       <div className='boardRow'>
         <button className='boardSection' style={getSectionsStyle(0)} onClick={(e) => onClickHandler(e, 1)}>{score[0]}</button>
         <button className='boardSection' style={getSectionsStyle(1)} onClick={(e) => onClickHandler(e, 2)}>{score[1]}</button>
