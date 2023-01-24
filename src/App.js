@@ -50,7 +50,14 @@ function App() {
   }
 
   const clearGameBoard = useCallback((sectionOneIndex, sectionTwoIndex, sectionThreeIndex) => {
-    const winnerValue = score.filter((item, index) => index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex);
+    const winnerValue = score.map((item, index) => {
+      if (index === sectionOneIndex || index === sectionTwoIndex || index === sectionThreeIndex){
+        return item;
+      }
+      else {
+        return "";
+      }
+    })
     setWinnerSections(winnerValue);
   }, [score])
 
